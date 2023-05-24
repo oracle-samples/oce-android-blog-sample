@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2023, Oracle and/or its affiliates.
+   Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+-->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/homepage_fragment">
+
+
+    <fragment
+            android:id="@+id/homepage_fragment"
+            android:name="com.oracle.content.samples.blog.ui.HomePageFragment"
+            android:label="@string/blog_topics"
+            tools:layout="@layout/fragment_homepage">
+        <action
+                android:id="@+id/action_topic_to_articles"
+                app:destination="@id/articles_fragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+
+    </fragment>
+    <fragment
+            android:id="@+id/articles_fragment"
+            android:name="com.oracle.content.samples.blog.ui.ArticlesFragment"
+            tools:layout="@layout/fragment_articles">
+
+        <action
+                android:id="@+id/action_article_to_detail"
+                app:destination="@id/articles_detail_fragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/articles_detail_fragment"
+        android:name="com.oracle.content.samples.blog.ui.ArticleDetailFragment"
+        android:label="@string/article_title"
+        tools:layout="@layout/fragment_article_detail"/>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:label="@string/action_settings"
+        android:name="com.oracle.content.samples.blog.ui.SettingsFragment"/>
+
+    <action
+        android:id="@+id/go_to_settings"
+        app:destination="@id/settings_fragment"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"/>
+
+    <fragment
+        android:id="@+id/error_fragment"
+        android:label="@string/sdk_error"
+        android:name="com.oracle.content.samples.blog.ui.ErrorFragment"/>
+
+    <action
+        android:id="@+id/go_to_error"
+        app:popUpTo="@id/homepage_fragment"
+        app:popUpToInclusive="true"
+        app:destination="@id/error_fragment"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"/>
+
+</navigation>

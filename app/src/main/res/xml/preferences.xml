@@ -1,0 +1,71 @@
+<!--
+  Copyright (c) 2023, Oracle and/or its affiliates.
+   Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+-->
+
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="?android:attr/actionBarSize">
+
+
+    <androidx.preference.PreferenceCategory
+        android:title="Connection settings"
+        >
+    <androidx.preference.EditTextPreference
+        android:key="pref_key_server_url"
+        android:title="Content Server URL"
+        />
+    <androidx.preference.EditTextPreference
+        android:key="pref_key_channel_token"
+        android:title="Channel Token"
+        />
+
+        <androidx.preference.Preference
+            android:key="pref_key_test_connection"
+            android:selectable="true"
+            android:title="Test Connection"
+            app:icon="@android:drawable/ic_menu_upload" />
+
+        <androidx.preference.Preference
+            android:key="pref_key_restore_default"
+            android:selectable="true"
+            android:title="Restore Default"
+            app:icon="@android:drawable/ic_menu_revert" />
+
+    </androidx.preference.PreferenceCategory>
+<!--
+    <androidx.preference.PreferenceCategory
+        android:title="Information"
+        >
+        <androidx.preference.Preference
+            android:key="pref_key_about"
+            android:selectable="true"
+            android:title="About"
+            app:icon="@android:drawable/ic_menu_help" />
+        <androidx.preference.Preference
+            android:key="pref_key_contact_us"
+            android:selectable="true"
+            android:title="Contact Us"
+            app:icon="@android:drawable/ic_menu_send" />
+    </androidx.preference.PreferenceCategory>
+-->
+
+    <androidx.preference.PreferenceCategory
+        android:title="SDK settings"
+        >
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="pref_key_cache_enabled"
+            android:title="Enable cache"
+            android:defaultValue="true"
+            />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="pref_key_logging_enabled"
+            android:title="Enable logging"
+            android:defaultValue="true"
+            />
+    </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
+

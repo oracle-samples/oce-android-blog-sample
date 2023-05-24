@@ -1,0 +1,130 @@
+/*
+ * Copyright (c) 2023, Oracle and/or its affiliates.
+ * Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 32
+    buildToolsVersion '32.1.0-rc1'
+
+    defaultConfig {
+        applicationId "com.oracle.content.samples.blog"
+        minSdkVersion 26
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+
+        archivesBaseName = "android-blog-sample"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        all {
+            buildConfigField("String", "SERVER_URL", "\"https://samples.mycontentdemo.com\"")
+            buildConfigField("String", "CHANNEL_TOKEN", "\"47c9fb78774d4485bc7090bf7b955632\"")
+        }
+    }
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions{
+
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
+    }
+
+    lintOptions {
+        disable 'OldTargetApi','IconLocation','FragmentTagUsage','ContentDescription',
+                'RtlHardcoded','ObsoleteLintCustomCheck','AllowBackup',
+                'HardcodedText','VectorPath','UnusedResources','IconLauncherShape',
+                'NotifyDataSetChanged', 'GradleDependency'
+        warningsAsErrors false
+        abortOnError false
+        htmlReport true
+        textReport true
+        textOutput file("build/reports/lint-results.txt")
+        xmlReport true
+        xmlOutput file("build/reports/lint-results.xml")
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    buildTypes {
+
+        // add the code from below line.
+        applicationVariants.all {
+                // this method is use to rename your release apk only
+            variant ->
+                variant.outputs.each {
+                        // on below line we are setting a name to our apk
+                    output ->
+                        // on below line we are specifying our app name.
+                        project.ext { appName = 'OCEBlogSample' }
+                        def newName = output.outputFile.name
+                        // on below line we are replacing our previous name with our app name.
+                        newName = newName.replace("android-blog-sample-release", "$project.ext.appName")
+                        // at last we are setting our apk name to it.
+                        output.outputFileName = newName
+                }
+            }
+
+        }
+}
+
+
+dependencies {
+
+
+    // delivery SDK dependency
+    implementation "com.oracle.content:content-delivery:$sdk_version"
+
+    //implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.1'
+
+    testImplementation 'junit:junit:4.13.2'
+
+    def test_version = "3.4.0"
+
+    implementation "androidx.test.espresso:espresso-idling-resource:$test_version"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test_version"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+
+}
